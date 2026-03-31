@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  height        Float?
+  weight        Float?
+  age           Int?
+  gender        String?   // 'male' or 'female'
+  activityLevel String?   // 'sedentary', 'light', 'moderate', 'active', 'very_active'
+  targetWeight  Float?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  foodLogs      FoodLog[]
+}
+
+model FoodLog {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  foodName    String
+  calories    Float
+  mealType    String   // 'breakfast', 'lunch', 'dinner', 'snack'
+  logDate     String   // 'YYYY-MM-DD'
+  estimated   Boolean  @default(true) // Mark as AI estimated
+  createdAt   DateTime @default(now())
+}
