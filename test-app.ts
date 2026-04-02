@@ -31,13 +31,14 @@ async function runTests() {
     const foodLogCount = await prisma.foodLog.count();
     console.log(`✅ Found ${foodLogCount} food log(s) in database\n`);
     
-    // Test 5: Gemini API (basic import check)
+        // Test 5: Gemini API (basic import check)
     console.log('Test 5: Gemini API Module');
     try {
       const ai = new GoogleGenAI({ apiKey: 'test-key' });
       console.log(`✅ Gemini API module: PASS\n`);
-    } catch (e) {
-      console.log(`⚠️ Gemini API initialization (expected to fail with test key): ${e.message}\n`);
+    } catch (e: unknown) {
+      const error = e instanceof Error ? e : new Error(String(e));
+      console.log(`⚠️ Gemini API initialization (expected to fail with test key): ${error.message}\n`);
     }
     
     console.log('🎉 All tests completed successfully!');
