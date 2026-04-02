@@ -26,7 +26,7 @@ function DashboardContent() {
     try {
       const dailyRes = await fetch(`/api/daily?date=${selectedDate}`).then(r => r.json());
       setDailyData(dailyRes);
-    } catch (e) {
+    } catch (e: unknown) {
       console.error(e);
     }
   };
@@ -55,7 +55,7 @@ function DashboardContent() {
         headers: { 'X-Gemini-Key': apiKey }
       });
       fetchDailyData(); // Refresh the list without breaking the profile load
-    } catch (e) {
+    } catch (e: unknown) {
       alert("Failed to delete log.");
     }
   };
@@ -210,7 +210,7 @@ function DashboardContent() {
                       try {
                          const parsed = JSON.parse(log.foodName);
                          if (Array.isArray(parsed)) itemsToDisplay = parsed;
-                      } catch (e) {
+                      } catch (e: unknown) {
                          // Fallback to flat string if not JSON
                       }
                     }

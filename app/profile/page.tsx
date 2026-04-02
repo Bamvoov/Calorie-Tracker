@@ -79,7 +79,7 @@ export default function ProfilePage() {
       } else {
         alert("Failed to save profile");
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(error);
     } finally {
       setLoading(false);
