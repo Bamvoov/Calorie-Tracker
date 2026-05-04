@@ -1,4 +1,4 @@
-# AuraDiet: AI Calorie Tracker
+#  AI Calorie Tracker
 
 A modern web application built with Next.js App Router, Tailwind CSS, Prisma, Supabase, Zustand, and Recharts. Uses Google's Gemini API (Free Tier) to parse natural language food descriptions into estimated calories.
 
