@@ -32,11 +32,6 @@ export default function LogFoodPage() {
     setResult(null);
 
     const cacheKey = input.trim().toLowerCase();
-    
-    // Check if we already logged this EXACT query recently strictly in this session
-    // (Wait, actually we should let them log the same food twice if they eat it again, 
-    // so cache is for preventing re-hitting the API just for estimation if they haven't saved it.
-    // For simplicity MVP we will hit the API directly but allow saving the result.)
 
     try {
       const apiKey = localStorage.getItem('gemini_api_key') || '';
@@ -65,29 +60,29 @@ export default function LogFoodPage() {
   };
 
   return (
-    <div className="max-w-xl mx-auto w-full">
-      <h1 className="text-3xl font-bold mb-2 gradient-text">Log Food with AI</h1>
-      <p className="text-gray-400 mb-8">Type what you ate (e.g., "2 boiled eggs and 1 slice toast") and let AI do the rest.</p>
+    <div className="max-w-xl mx-auto w-full pt-8">
+      <h1 className="text-3xl font-black mb-2 text-[#eaf2e3]">Log Food with AI</h1>
+      <p className="text-[#eaf2e3]/70 mb-8 font-bold">Type what you ate (e.g., "2 boiled eggs and 1 slice toast") and let AI do the rest.</p>
 
-      <form onSubmit={handleEstimate} className="glass p-6 rounded-2xl mb-8 border border-gray-800 shadow-2xl">
+      <form onSubmit={handleEstimate} className="floating-card-2 p-6 md:p-8 mb-8 border border-white/60 relative z-10">
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
-             <label className="block text-sm text-gray-400 mb-1">Date</label>
+             <label className="block text-xs font-bold text-[#264a22]/70 mb-1">Date</label>
              <input
                type="date"
                value={logDate}
                onChange={(e) => setLogDate(e.target.value)}
                disabled={loading}
-               className="w-full bg-black/40 border border-gray-700 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500"
+               className="w-full bg-white/60 border border-[#264a22]/20 rounded-xl px-3 py-3 text-black font-bold focus:outline-none focus:ring-2 focus:ring-[#264a22] transition-all"
              />
           </div>
           <div>
-             <label className="block text-sm text-gray-400 mb-1">Meal</label>
+             <label className="block text-xs font-bold text-[#264a22]/70 mb-1">Meal</label>
              <select
                value={mealType}
                onChange={(e) => setMealType(e.target.value)}
                disabled={loading}
-               className="w-full bg-black/40 border border-gray-700 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500 appearance-none"
+               className="w-full bg-white/60 border border-[#264a22]/20 rounded-xl px-3 py-3 text-black font-bold focus:outline-none focus:ring-2 focus:ring-[#264a22] transition-all appearance-none"
              >
                <option value="breakfast">Breakfast</option>
                <option value="lunch">Lunch</option>
@@ -97,21 +92,21 @@ export default function LogFoodPage() {
           </div>
         </div>
 
-        <div className="relative mb-4">
-          <label className="block text-sm text-gray-400 mb-1">What did you eat?</label>
+        <div className="relative mb-6">
+          <label className="block text-xs font-bold text-[#264a22]/70 mb-1">What did you eat?</label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={loading}
-            placeholder="What did you eat today?"
-            className="w-full bg-black/40 border border-gray-700 rounded-xl p-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 resize-none h-32"
+            placeholder="E.g. A bowl of oatmeal with berries and a coffee..."
+            className="w-full bg-white/60 border border-[#264a22]/20 rounded-xl px-4 py-4 text-black font-medium focus:outline-none focus:ring-2 focus:ring-[#264a22] resize-none h-32 transition-all shadow-inner"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading || input.trim().length === 0 ? true : undefined}
-          className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-[#264a22] hover:bg-[#1a3317] text-[#eaf2e3] font-black py-4 px-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed border border-[#264a22]/50 shadow-lg"
         >
           {loading ? (
             <Loader2 className="w-5 h-5 animate-spin" />
@@ -122,36 +117,36 @@ export default function LogFoodPage() {
         </button>
 
         {error && (
-          <div className="mt-4 p-4 rounded-xl bg-red-900/20 border border-red-500/50 text-red-400 text-sm">
+          <div className="mt-4 p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm font-bold text-center shadow-sm">
             {error}
           </div>
         )}
       </form>
 
       {result && (
-        <div className="glass p-6 rounded-2xl border border-green-500/20 shadow-xl slide-in-bottom animate-in fade-in duration-300">
-          <h2 className="text-xl font-bold mb-4 text-green-400 flex items-center gap-2">
-            <PlusSquare className="w-5 h-5" /> Saved Successfully!
+        <div className="floating-card p-6 md:p-8 border border-[#264a22]/20 slide-in-bottom animate-in fade-in duration-300 relative z-10 bg-white/40 backdrop-blur-md">
+          <h2 className="text-xl font-black mb-4 text-[#264a22] flex items-center gap-2">
+            <PlusSquare className="w-6 h-6" /> Saved Successfully!
           </h2>
-          <div className="space-y-3">
-            <div className="p-4 bg-black/30 rounded-lg flex justify-between items-center text-lg">
-              <span className="text-gray-300">Total Estimated</span>
-              <span className="font-bold text-white">{result.result.calories} kcal</span>
+          <div className="space-y-4">
+            <div className="p-4 bg-white/80 rounded-xl flex justify-between items-center text-lg shadow-sm border border-[#264a22]/10">
+              <span className="text-[#264a22]/70 font-bold text-sm">Total Estimated</span>
+              <span className="font-black text-black">{result.result.calories} kcal</span>
             </div>
             {result.raw?.items && (
-              <div className="pt-2 border-t border-gray-800">
-                <p className="text-xs text-gray-500 mb-2 uppercase tracking-wider">Breakdown</p>
+              <div className="pt-2 border-t border-[#264a22]/10">
+                <p className="text-[10px] text-[#264a22]/60 mb-2 uppercase font-bold tracking-wider">Breakdown</p>
                 <div className="space-y-2">
                   {result.raw.items.map((item: any, i: number) => (
-                    <div key={i} className="flex justify-between text-sm text-gray-400">
-                      <span>{item.name}</span>
-                      <span>{item.calories} kcal</span>
+                    <div key={i} className="flex justify-between text-sm text-[#264a22]">
+                      <span className="font-bold">{item.name}</span>
+                      <span className="font-black text-black">{item.calories} kcal</span>
                     </div>
                   ))}
                 </div>
               </div>
             )}
-            <p className="text-xs text-gray-600 mt-4 text-center">
+            <p className="text-xs font-bold text-[#264a22]/50 mt-6 text-center">
               *Calories are AI estimated and may not be 100% accurate.
             </p>
           </div>

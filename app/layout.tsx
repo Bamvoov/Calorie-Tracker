@@ -17,9 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-[#0f1115] text-white selection:bg-cyan-500/30`}>
+      <body className={`${inter.className} min-h-screen selection:bg-[#c9f268]/50 overflow-x-hidden`}>
         <NavBar />
-        <main className="max-w-4xl mx-auto px-4 pt-4 pb-24 md:pt-24 md:pb-12 min-h-screen flex flex-col">
+        <main className="w-full max-w-[1600px] mx-auto px-4 pt-4 pb-24 md:pt-24 md:pb-12 min-h-screen flex flex-col relative z-10">
           {children}
         </main>
       </body>

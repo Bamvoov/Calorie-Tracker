@@ -86,55 +86,53 @@ export default function ProfilePage() {
     }
   };
 
-  if (fetching) return <div className="text-center mt-10 text-gray-400">Loading Profile...</div>;
-
   return (
-    <div className="max-w-xl mx-auto w-full">
-      <h1 className="text-3xl font-bold mb-8 gradient-text">Your Profile</h1>
+    <div className="max-w-xl mx-auto w-full pt-8 relative z-10">
+      <h1 className="text-3xl font-black mb-8 text-[#eaf2e3]">Your Profile</h1>
 
-      <form onSubmit={handleSubmit} className="glass p-6 rounded-2xl space-y-6">
+      <form onSubmit={handleSubmit} className="floating-card p-6 md:p-8 space-y-6 border border-white/60">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Height (cm)</label>
+            <label className="block text-xs font-bold text-[#264a22]/70 mb-1">Height (cm)</label>
             <input
               type="number"
               name="height"
               value={formData.height}
               onChange={handleChange}
-              className="w-full bg-black/40 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-cyan-500"
+              className="w-full bg-white/60 border border-[#264a22]/20 rounded-xl px-3 py-3 text-black font-black focus:outline-none focus:ring-2 focus:ring-[#264a22] transition-all"
               required
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Weight (kg)</label>
+            <label className="block text-xs font-bold text-[#264a22]/70 mb-1">Weight (kg)</label>
             <input
               type="number"
               name="weight"
               value={formData.weight}
               onChange={handleChange}
-              className="w-full bg-black/40 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-cyan-500"
+              className="w-full bg-white/60 border border-[#264a22]/20 rounded-xl px-3 py-3 text-black font-black focus:outline-none focus:ring-2 focus:ring-[#264a22] transition-all"
               required
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Age</label>
+            <label className="block text-xs font-bold text-[#264a22]/70 mb-1">Age</label>
             <input
               type="number"
               name="age"
               value={formData.age}
               onChange={handleChange}
-              className="w-full bg-black/40 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-cyan-500"
+              className="w-full bg-white/60 border border-[#264a22]/20 rounded-xl px-3 py-3 text-black font-black focus:outline-none focus:ring-2 focus:ring-[#264a22] transition-all"
               required
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Target Weight (kg)</label>
+            <label className="block text-xs font-bold text-[#264a22]/70 mb-1">Target Weight (kg)</label>
             <input
               type="number"
               name="targetWeight"
               value={formData.targetWeight}
               onChange={handleChange}
-              className="w-full bg-black/40 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-cyan-500"
+              className="w-full bg-white/60 border border-[#264a22]/20 rounded-xl px-3 py-3 text-black font-black focus:outline-none focus:ring-2 focus:ring-[#264a22] transition-all"
               required
             />
           </div>
@@ -142,24 +140,24 @@ export default function ProfilePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Gender</label>
+            <label className="block text-xs font-bold text-[#264a22]/70 mb-1">Gender</label>
             <select
               name="gender"
               value={formData.gender}
               onChange={handleChange}
-              className="w-full bg-black/40 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-cyan-500"
+              className="w-full bg-white/60 border border-[#264a22]/20 rounded-xl px-3 py-3 text-black font-bold focus:outline-none focus:ring-2 focus:ring-[#264a22] transition-all"
             >
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Activity Level</label>
+            <label className="block text-xs font-bold text-[#264a22]/70 mb-1">Activity Level</label>
             <select
               name="activityLevel"
               value={formData.activityLevel}
               onChange={handleChange}
-              className="w-full bg-black/40 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-cyan-500"
+              className="w-full bg-white/60 border border-[#264a22]/20 rounded-xl px-3 py-3 text-black font-bold focus:outline-none focus:ring-2 focus:ring-[#264a22] transition-all"
             >
               <option value="sedentary">Sedentary (Little/No Exercise)</option>
               <option value="light">Light (1-3 days/week)</option>
@@ -171,14 +169,14 @@ export default function ProfilePage() {
         </div>
 
         {tdee && dietMetrics && (
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-800/30 border border-gray-700 p-4 rounded-xl text-center">
-              <p className="text-gray-400 text-sm">Maintenance TDEE</p>
-              <p className="text-2xl font-bold text-gray-300">{tdee} kcal</p>
+          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#264a22]/10">
+            <div className="border-2 border-[#264a22]/20 rounded-2xl p-4 flex flex-col items-center justify-center bg-white/40 shadow-inner">
+              <p className="text-[10px] font-bold text-[#264a22]/70 mb-1 uppercase tracking-wider">Maintenance TDEE</p>
+              <p className="text-2xl font-black text-black">{Math.round(tdee)} kcal</p>
             </div>
-            <div className={`border p-4 rounded-xl text-center ${dietMetrics.mode === 'maintain' ? 'bg-gray-800/30 border-gray-700' : 'bg-cyan-900/20 border-cyan-800/50'}`}>
-              <p className="text-cyan-400/80 text-sm">Target Limit</p>
-              <p className="text-2xl font-bold text-cyan-400">{dietMetrics.targetCalories} kcal</p>
+            <div className={`border-2 rounded-2xl p-4 flex flex-col items-center justify-center shadow-md transform transition-transform hover:scale-105 ${dietMetrics.mode === 'maintain' ? 'bg-white/60 border-[#264a22]/30' : 'bg-white/80 border-[#264a22]'}`}>
+              <p className="text-[10px] font-bold text-[#264a22]/80 mb-1 uppercase tracking-wider">Target Limit</p>
+              <p className="text-2xl font-black text-black">{dietMetrics.targetCalories} kcal</p>
             </div>
           </div>
         )}
@@ -186,7 +184,7 @@ export default function ProfilePage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold py-3 rounded-xl transition-all disabled:opacity-50"
+          className="w-full mt-4 bg-[#264a22] hover:bg-[#1a3317] text-[#eaf2e3] font-black py-4 rounded-xl shadow-lg transition-transform active:scale-95 disabled:opacity-50 border border-[#264a22]/50 text-sm"
         >
           {loading ? "Saving..." : "Save Profile"}
         </button>

@@ -33,7 +33,6 @@ export default function LoginPage() {
 
       window.location.href = '/';
     } catch (err: any) {
-
       setError(err.message);
     } finally {
       setLoading(false);
@@ -42,32 +41,32 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-[80vh] flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-8 glass p-8 rounded-3xl border border-gray-800 shadow-2xl relative overflow-hidden">
+      <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden">
         {/* Decorative elements */}
-        <div className="absolute top-0 left-0 p-4 opacity-10 blur-[2px]">
-          <LogIn className="w-24 h-24 text-cyan-500" />
+        <div className="absolute top-0 left-0 p-4 opacity-10">
+          <LogIn className="w-24 h-24 text-[#a5cd4a]" />
         </div>
         
-        <div className="text-center mt-2">
-          <h2 className="text-3xl font-bold tracking-tight text-white mb-2">Welcome Back</h2>
-          <p className="text-sm text-gray-400">Log in to your account</p>
+        <div className="text-center mt-2 relative z-10">
+          <h2 className="text-3xl font-black tracking-tight text-gray-900 mb-2">Welcome Back</h2>
+          <p className="text-sm font-medium text-gray-500">Log in to your account</p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6 relative z-10" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-3 rounded-xl text-sm text-center">
+            <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-2xl text-sm font-medium text-center">
               {error}
             </div>
           )}
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1" htmlFor="email">Email</label>
+              <label className="block text-sm font-bold text-gray-700 mb-1" htmlFor="email">Email</label>
               <input
                 id="email"
                 type="email"
                 required
-                className="w-full bg-black/40 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all z-10 relative"
+                className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#c9f268] focus:border-[#c9f268] transition-all"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -75,19 +74,19 @@ export default function LoginPage() {
             </div>
 
             <div className="relative">
-              <label className="block text-sm font-medium text-gray-300 mb-1" htmlFor="password">Password</label>
+              <label className="block text-sm font-bold text-gray-700 mb-1" htmlFor="password">Password</label>
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 required
-                className="w-full bg-black/40 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all pr-12 z-10 relative"
+                className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#c9f268] focus:border-[#c9f268] transition-all pr-12"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
                <button
                 type="button"
-                className="absolute right-3 top-9 text-gray-400 hover:text-white transition-colors z-20"
+                className="absolute right-3 top-[34px] text-gray-400 hover:text-gray-600 transition-colors"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -98,15 +97,15 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-cyan-600 hover:bg-cyan-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 focus:ring-offset-gray-900 transition-all disabled:opacity-50 relative z-20"
+            className="w-full flex justify-center py-4 px-4 border border-transparent rounded-2xl shadow-sm text-sm font-bold text-black bg-[#c9f268] hover:bg-[#b8e84a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#c9f268] transition-transform active:scale-95 disabled:opacity-50"
           >
             {loading ? 'Logging in...' : 'Log in'}
           </button>
         </form>
 
-        <div className="text-center text-sm text-gray-400 mt-6 relative z-10">
+        <div className="text-center text-sm font-medium text-gray-500 mt-6 relative z-10">
           Don&apos;t have an account?{' '}
-          <Link href="/signup" className="font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+          <Link href="/signup" className="font-bold text-[#a5cd4a] hover:text-black transition-colors">
             Sign up
           </Link>
         </div>

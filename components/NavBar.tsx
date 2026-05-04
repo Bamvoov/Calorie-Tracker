@@ -17,12 +17,12 @@ export function NavBar() {
   ];
 
   return (
-    <nav className="fixed bottom-0 w-full glass border-t border-gray-800 md:top-0 md:bottom-auto md:border-t-0 md:border-b z-50">
-      <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-around md:justify-end md:gap-8">
+    <nav className="fixed bottom-0 w-full bg-[#eaf2e3] md:top-0 md:bottom-auto shadow-sm z-50">
+      <div className="max-w-[1600px] mx-auto px-4 h-16 flex items-center justify-around md:justify-end md:gap-8">
         {/* Logo for desktop */}
         <div className="hidden md:flex flex-1 items-center">
           <Link href="/">
-            <span className="text-xl font-bold gradient-text">Calorie-Tracker</span>
+            <span className="text-xl font-black text-[#264a22] tracking-tight">Calorie-Tracker</span>
           </Link>
         </div>
 
@@ -36,15 +36,15 @@ export function NavBar() {
               href={link.href}
               className={twMerge(
                 clsx(
-                  'flex flex-col md:flex-row items-center gap-1 md:gap-2 px-3 py-2 rounded-xl transition-all',
+                  'flex flex-col md:flex-row items-center gap-1 md:gap-2 px-4 py-2 rounded-full transition-all font-bold',
                   isActive
-                    ? 'text-cyan-400 bg-cyan-400/10'
-                    : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'
+                    ? 'text-black bg-[#d2ded0]'
+                    : 'text-[#264a22]/70 hover:text-[#264a22] hover:bg-[#d2ded0]/50'
                 )
               )}
             >
-              <Icon className={clsx('w-5 h-5', isActive ? 'text-cyan-400' : 'text-gray-400')} />
-              <span className="text-xs md:text-sm font-medium">{link.label}</span>
+              <Icon className={clsx('w-5 h-5', isActive ? 'text-black' : 'text-[#264a22]/70')} />
+              <span className="text-[10px] md:text-sm">{link.label}</span>
             </Link>
           );
         })}
