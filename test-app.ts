@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { GoogleGenAI } from '@google/genai';
-import { hashPassword, comparePasswords, signToken, verifyToken } from '@/lib/auth';
+import { hashPassword, comparePasswords } from '@/lib/auth';
+import { signToken, verifyToken } from '@/lib/jwt';
 
 const prisma = new PrismaClient();
 
