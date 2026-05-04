@@ -31,8 +31,9 @@ export default function LoginPage() {
         throw new Error(data.error || 'Failed to log in');
       }
 
-      router.push('/');
+      window.location.href = '/';
     } catch (err: any) {
+
       setError(err.message);
     } finally {
       setLoading(false);

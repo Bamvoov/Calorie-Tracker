@@ -31,7 +31,7 @@ export default function SignupPage() {
         throw new Error(data.error || 'Failed to sign up');
       }
 
-      router.push('/');
+      window.location.href = '/';
     } catch (err: any) {
       setError(err.message);
     } finally {
